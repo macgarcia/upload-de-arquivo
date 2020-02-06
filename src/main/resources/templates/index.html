@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Gestor pessoal</title>
+</head>
+<body>
+	<form method="POST" action="/upload" enctype="multipart/form-data">
+		<input type="text" id="nome" name="nome"><br>
+		<br> <input type="file" name="arquivo"><br>
+		<br> <input type="submit" value="Enviar">
+	</form>
+	<br>
+	<br>
+	<div th:each = "arquivo : ${arquivos}">
+		<a th:href="@{/pegarArquivo/{id}(id=${arquivo.id})}" 
+			th:text="${arquivo.nome}">
+		</a>
+		<a id="ver" th:onclick="'javascript:imprimirImagem(' + ${arquivo.id} + ');'" style="cursor: pointer;">
+			Ver
+		</a>
+	</div>
+	<div id="imagem" style="border: solid black 1px; width:400px; height: 200px; margin-left: 350px; margin-top: -150px;">
+		<img id="foto">
+	</div>
+	
+	<script src="js/scripts.js"></script>
+</body>
+</html>
+
